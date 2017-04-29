@@ -1,0 +1,16 @@
+[
+{
+  "modid": "foody",
+  "name": "Foody",
+  "description": "",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://tehnut.info/",
+  "updateUrl": "http://tehnut.info/",
+  "authorList": [ "TehNut", "InsomniaKitten" ],
+  "credits": "",
+  "logoFile": "/foody_icon.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
