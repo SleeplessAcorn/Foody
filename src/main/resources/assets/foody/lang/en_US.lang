@@ -1,2 +1,6 @@
 # Creative tab
 itemGroup.foody=Foody
+
+# Foods
+item.foody.food.air.name=Sweet sweet nothingness
+item.foody.food.toast.name=Toast

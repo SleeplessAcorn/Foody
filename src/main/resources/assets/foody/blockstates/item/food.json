@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "transform": "forge:default-item"
+  },
+  "variants": {
+    "food": {
+      "air": {
+        "textures": {
+          "layer0": "items/barrier"
+        }
+      },
+      "toast": {
+        "textures": {
+          "layer0": "foody:items/food/toast"
+        }
+      }
+    }
+  }
+}

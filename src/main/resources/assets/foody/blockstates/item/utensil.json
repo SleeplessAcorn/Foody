@@ -1,0 +1,51 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "transform": "forge:default-item"
+  },
+  "variants": {
+    "utensil": {
+      "skillet": {
+        "textures": {
+          "layer0": "foody:items/tool/skillet"
+        }
+      },
+      "pot": {
+        "textures": {
+          "layer0": "foody:items/tool/pot"
+        }
+      },
+      "bowl": {
+        "textures": {
+          "layer0": "foody:items/tool/bowl"
+        }
+      },
+      "pan": {
+        "textures": {
+          "layer0": "foody:items/tool/pan"
+        }
+      },
+      "cutting_board": {
+        "textures": {
+          "layer0": "foody:items/tool/cutting_board"
+        }
+      },
+      "juicer": {
+        "textures": {
+          "layer0": "foody:items/tool/juicer"
+        }
+      },
+      "bakeware": {
+        "textures": {
+          "layer0": "foody:items/tool/bakeware"
+        }
+      },
+      "mortar_pestle": {
+        "textures": {
+          "layer0": "foody:items/tool/mortar_pestle"
+        }
+      }
+    }
+  }
+}

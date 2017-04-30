@@ -2,6 +2,7 @@ package info.sleeplessacorn.foody.feature.mundane.data;
 
 import info.sleeplessacorn.foody.feature.mundane.FeatureMundane;
 import info.sleeplessacorn.foody.feature.mundane.Utensil;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -12,12 +13,13 @@ public final class Chef {
 
     private final String name;
     private FoodType type = FoodType.SOLID;
-    private int hunger;
-    private float saturation;
-    private Object[] ingredients;
-    private Utensil utensil;
-    private boolean alwaysEdible;
-    private Pair<PotionEffect, Float>[] effects;
+    private int hunger = 0;
+    private float saturation = 0.0F;
+    private CookingStyle cookingStyle = CookingStyle.HAND;
+    private Object[] ingredients = new Object[] { ItemStack.EMPTY };
+    private Utensil utensil = null;
+    private boolean alwaysEdible = false;
+    private Pair<PotionEffect, Float>[] effects = null;
 
     public Chef(@Nonnull String name) {
         this.name = name;
@@ -34,7 +36,12 @@ public final class Chef {
         return this;
     }
 
-    public Chef withIngredients(@Nullable Object... ingredients) {
+    public Chef withStyle(CookingStyle cookingStyle) {
+        this.cookingStyle = cookingStyle;
+        return this;
+    }
+
+    public Chef withIngredients(@Nonnull Object... ingredients) {
         this.ingredients = ingredients;
         return this;
     }
@@ -56,7 +63,7 @@ public final class Chef {
 
     @Nonnull
     public Food cook() {
-        Food food = new Food(name, type, hunger, saturation, ingredients, utensil, alwaysEdible, effects);
+        Food food = new Food(name, type, hunger, saturation, cookingStyle, ingredients, utensil, alwaysEdible, effects);
         FeatureMundane.FOODS.put(food.getName(), food);
         return food;
     }

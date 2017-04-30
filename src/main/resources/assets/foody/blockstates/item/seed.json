@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "transform": "forge:default-item"
+  },
+  "variants": {
+    "seed": {
+
+    },
+    "inventory": [{
+      "textures": {
+        "layer0": "minecraft:items/seeds_wheat"
+      }
+    }]
+  }
+}

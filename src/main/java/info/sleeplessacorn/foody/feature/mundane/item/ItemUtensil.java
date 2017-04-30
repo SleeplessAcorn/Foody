@@ -2,16 +2,18 @@ package info.sleeplessacorn.foody.feature.mundane.item;
 
 import info.sleeplessacorn.foody.Foody;
 import info.sleeplessacorn.foody.feature.mundane.Utensil;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import tehnut.lib.mc.item.ItemEnum;
+import tehnut.lib.mc.model.IModeled;
 
-public class ItemUtensil extends ItemEnum<Utensil> {
+import java.util.List;
+
+public class ItemUtensil extends ItemEnum<Utensil> implements IModeled {
 
     public ItemUtensil() {
         super(Utensil.class, Foody.MODID + ".utensil");
 
-        setCreativeTab(CreativeTabs.TOOLS);
+        setCreativeTab(Foody.TAB_FOODY);
         setMaxStackSize(1);
     }
 
@@ -23,5 +25,11 @@ public class ItemUtensil extends ItemEnum<Utensil> {
     @Override
     public boolean hasContainerItem(ItemStack stack) {
         return true;
+    }
+
+    @Override
+    public void getVariants(List<String> variants) {
+        for (Utensil utensil : Utensil.values())
+            variants.add("utensil=" + utensil.getName());
     }
 }
