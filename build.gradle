@@ -17,6 +17,11 @@ plugins {
 
 apply plugin: 'maven-publish'
 
+configurations {
+    shade
+    compile.extendsFrom shade
+}
+
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
@@ -40,6 +45,7 @@ repositories {
 dependencies {
     // TehNut Maven
     deobfCompile "mcp.mobius.waila:Hwyla:1.8.13-B26_1.11"
+    shade "tehnut.lib:LendingLibrary:1.11.2-2.0.0-24"
 
     // Prog Maven
     deobfCompile "mezz.jei:jei_1.11.2:4.2.10.248"
@@ -74,8 +80,19 @@ processResources {
     }
 }
 
+reobf {
+    jar {
+        extraLines "PK: tehnut/lib info/sleeplessacorn/foody/lib"
+    }
+}
+
 jar {
     classifier = ''
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)) {
+            exclude 'META-INF', 'META-INF/**'
+        }
+    }
     manifest.mainAttributes(
             "Built-By": System.getProperty('user.name'),
             "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",

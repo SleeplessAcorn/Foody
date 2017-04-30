@@ -1,9 +1,5 @@
 package info.sleeplessacorn.foody;
 
-import info.sleeplessacorn.foody.lib.feature.Feature;
-import info.sleeplessacorn.foody.lib.feature.FeatureHandler;
-import info.sleeplessacorn.foody.lib.feature.IFeature;
-import info.sleeplessacorn.foody.lib.util.helper.ReflectionHelper;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -12,6 +8,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import tehnut.lib.forge.feature.Feature;
+import tehnut.lib.forge.feature.FeatureHandler;
+import tehnut.lib.forge.feature.IFeature;
+import tehnut.lib.forge.util.helper.ReflectionHelper;
+import tehnut.lib.forge.util.helper.StringHelper;
 
 import java.util.List;
 
@@ -27,19 +28,25 @@ public class Foody {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        featureHandler = new FeatureHandler(new Configuration(event.getModConfigurationDirectory()));
         features = ReflectionHelper.getAnnotationInstances(event.getAsmData(), Feature.class, IFeature.class);
+        featureHandler = new FeatureHandler(new Configuration(event.getSuggestedConfigurationFile()), features);
 
-        featureHandler.preInit(features, event);
+        String featureNames = "";
+        for (Pair<IFeature, Feature> feature : features)
+            featureNames += "\n  - " + StringHelper.toPretty(feature.getRight().name());
+
+        event.getModMetadata().description += "\nLoaded modules: " + featureNames;
+
+        featureHandler.preInit(event);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        featureHandler.init(features, event);
+        featureHandler.init(event);
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        featureHandler.postInit(features, event);
+        featureHandler.postInit(event);
     }
 }
